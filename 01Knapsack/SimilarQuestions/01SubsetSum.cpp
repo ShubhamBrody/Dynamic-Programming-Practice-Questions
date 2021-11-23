@@ -16,24 +16,29 @@ int main()
     int target;
     cin >> target;
 
-    vector<vector<int>> table(n + 1, vector<int>(target + 1, 1));
+    vector<vector<int>> table(n + 1, vector<int>(target+1));
 
     for (int i = 0; i <= n; i++)
     {
         for (int j = 0; j <= target; j++)
         {
-            if (i == 0)
+            if(j == 0)
             {
-                table[i][j] = 0;
+                table[i][0] = 1;
                 continue;
             }
 
-            if (W[i] > j)
-                table[i][j] = table[i - 1][j];
-            else
+            if (i == 0)
             {
-                table[i][j] = table[i - 1][j - W[i - 1]] || table[i - 1][j];
-                cout << table[i][j] << endl;
+                table[0][j] = 0;
+                continue;
+            }
+
+            if (W[i - 1] > j)
+                table[i][j] = table[i - 1][j];
+            if(j>=W[i-1])
+            {
+                table[i][j] = table[i - 1][j] || table[i - 1][j - W[i - 1]];
             }
         }
     }
