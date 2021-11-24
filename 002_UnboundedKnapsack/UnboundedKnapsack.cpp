@@ -21,10 +21,10 @@ int main()
     
     for(int i = 1; i <= n; i++){
         for(int j = 1; j <= target; j++){
-            if(W[i] > j) 
-            table[i][j] = table[i-1][j];
+            if(W[i-1] <= j) 
+            table[i][j] = max(C[i-1] + table[i][j-W[i-1]], table[i-1][j]);
             else
-            table[i][j] = max(C[i] + table[i][j-W[i-1]], table[i-1][j]);
+            table[i][j] = table[i-1][j];
         }
     }
 
