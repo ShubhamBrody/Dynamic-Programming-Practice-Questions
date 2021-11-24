@@ -3,9 +3,11 @@ using namespace std;
 
 int KnapsackProb(vector<vector<int>> &table, vector<int> W, vector<int> C, int t, int n) {
     if(t == 0 || n == 0) return 0;
+    if(table[n][t] != -1)
+    return table[n][t];
     if(W[n-1] > t)
-    return KnapsackProb(table, W, C, t, n-1); // An imp condn to keep in mind...
-    return max(C[n-1]+KnapsackProb(table, W, C, t-W[n-1], n-1), KnapsackProb(table, W, C, t, n-1));
+    return table[n][t] = KnapsackProb(table, W, C, t, n-1); // An imp condn to keep in mind...
+    return table[n][t] = max(C[n-1]+KnapsackProb(table, W, C, t-W[n-1], n-1), KnapsackProb(table, W, C, t, n-1));
 }
 
 int main() {
